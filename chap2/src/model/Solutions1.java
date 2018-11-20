@@ -1,6 +1,7 @@
 package model;
+import utils.Utils;
 
-public class Solutions {
+public class Solutions1 {
     /** Algorithm 2.1
      * Sort the given array using insertion sort
      * @param A
@@ -36,13 +37,6 @@ public class Solutions {
                 A[i+1] = key;
             }
         }
-    }
-    
-    private static void print(int[] a) {
-        for (int i: a) {
-            System.out.print(i + ", ");
-        }
-        
     }
     
     /** Exercise 2.1-3
@@ -97,13 +91,13 @@ public class Solutions {
         // Driver for insertion-sort
         int[] A = new int[] {5, 2, 4, 6, 1, 3};
         insertionSort(A, true);
-        print(A);
+        Utils.print(A);
         
         System.out.println();
         
         int[] B = new int[] {5, 2, 4, 6, 1, 3};
         insertionSort(B, false);
-        print(B);
+        Utils.print(B);
         
         System.out.println();
         
@@ -118,6 +112,6 @@ public class Solutions {
         int[] E = new int[] {1,1,1,0,1,1,1};
         int[] F = new int[] {1,0,1,1,0,1,0};
         int[] G = addBInteger(E, F);
-        print(G);
+        Utils.print(G);
     }
 }
