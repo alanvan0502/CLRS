@@ -59,5 +59,9 @@ public class Solutions3 {
 		int[] A = new int[] {4, 5, 2, 1, 6};
 		mergeSort(A, 0, A.length-1);
 		Utils.print(A);
+		
+		int[] B = new int[] {6, 2, 1, 5, 6, 7};
+		mergeSort(B, 0, B.length-1);
+		Utils.print(B);
 	}
 }
