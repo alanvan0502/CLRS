@@ -74,45 +74,56 @@ public class Solutions3 {
 
 		int i = 0;
 		int j = 0;
-		int l = 0;
 
-		while (i != n1 && j != n2) {
-			if (L[i] <= R[j]) {
-				A[l] = L[i];
+		for (int k = p; k <= r; k++) {
+			if (i >= n1) {
+				A[k] = R[j];
+				j++;
+			} else if (j >= n2) {
+				A[k] = L[i];
 				i++;
-				l++;
+			} else if (L[i] <= R[j]) {
+				A[k] = L[i];
+				i++;
 			} else {
-				A[l] = R[j];
+				A[k] = R[j];
 				j++;
-				l++;
 			}
 		}
-
-		while (l <= r) {
-			if (i < n1) {
-				A[l] = L[i];
-				i++;
-				l++;
-			}
-			if (j < n2) {
-				A[l] = R[j];
-				j++;
-				l++;
-			}
-		}
-
 	}
+
+	/**
+	 * Exercise 2.3-6
+	 */
+//	This function searches for the place in the sorted array where key can be correctly slotted in
+//	so that the array is still properly sorted. In Insertion Sort algorithm at Page 18, this can be used to
+//  find the position where the key = A[j] can be slotted into the sorted sequence A[1..j-1]. However, once
+//  this is inserted, the whole portion of the sequence A[1..j-1] that is larger than key value will need to be
+//  shifted by 1 to the right. This is a O(n) algorithm. Hence, the whole algorithm still has O(n^2) time complexity
+//  For more clarity, refer to page 18 of CLRS or Solutions1.java in this project.
+    public static int binarySearchArray(int[] array, int low, int high, int key) {
+        if (low > high) return - 1;
+        else {
+            int mid = (int) Math.floor(low + (high - low)/2);
+            if (array[mid] <= key && key < array[mid + 1])
+                return mid;
+            else if (array[mid] > key)
+                return binarySearchArray(array, low, mid - 1, key);
+            else
+                return binarySearchArray(array, mid + 1, high, key);
+        }
+    }
 
 	/** Driver */
 	public static void main(String[] args) {
-		//		int[] A = new int[] {4, 5, 2, 1, 6};
-		//		mergeSort(A, 0, A.length-1);
-		//		Utils.print(A);
-		//
-		//		int[] B = new int[] {6, 2, 1, 5, 6, 7};
-		//		mergeSort(B, 0, B.length-1);
-		//		Utils.print(B);
-		//
+		int[] A = new int[] {4, 5, 2, 1, 6};
+		mergeSort(A, 0, A.length-1);
+		Utils.print(A);
+
+		int[] B = new int[] {6, 2, 1, 5, 6, 7};
+		mergeSort(B, 0, B.length-1);
+		Utils.print(B);
+
 		int[] C = new int[] {1, 4, 7, 8, 0, 2, 3};
 		mergeNoSentinels(C, 0, 3, C.length - 1);
 		Utils.print(C);
