@@ -95,24 +95,44 @@ public class Solutions3 {
 	/**
 	 * Exercise 2.3-6
 	 */
-//	This function searches for the place in the sorted array where key can be correctly slotted in
-//	so that the array is still properly sorted. In Insertion Sort algorithm at Page 18, this can be used to
-//  find the position where the key = A[j] can be slotted into the sorted sequence A[1..j-1]. However, once
-//  this is inserted, the whole portion of the sequence A[1..j-1] that is larger than key value will need to be
-//  shifted by 1 to the right. This is a O(n) algorithm. Hence, the whole algorithm still has O(n^2) time complexity
-//  For more clarity, refer to page 18 of CLRS or Solutions1.java in this project.
-    public static int binarySearchArray(int[] array, int low, int high, int key) {
-        if (low > high) return - 1;
-        else {
-            int mid = (int) Math.floor(low + (high - low)/2);
-            if (array[mid] <= key && key < array[mid + 1])
-                return mid;
-            else if (array[mid] > key)
-                return binarySearchArray(array, low, mid - 1, key);
-            else
-                return binarySearchArray(array, mid + 1, high, key);
-        }
-    }
+	//	This function searches for the place in the sorted array where key can be correctly slotted in
+	//	so that the array is still properly sorted. In Insertion Sort algorithm at Page 18, this can be used to
+	//  find the position where the key = A[j] can be slotted into the sorted sequence A[1..j-1] in O(log n) time complexity.
+	//  However, once this is inserted, the whole portion of the sequence A[1..j-1] that is larger than key value will need to be
+	//  shifted by 1 to the right. This is a O(n) algorithm. Hence, the whole algorithm still has O(n^2) time complexity
+	//  For more clarity, refer to page 18 of CLRS or Solutions1.java in this project.
+	public static int binarySearchArray(int[] array, int low, int high, int key) {
+		if (low > high) return - 1;
+		else {
+			int mid = (int) Math.floor(low + (high - low)/2);
+			if (array[mid] <= key && key < array[mid + 1])
+				return mid;
+			else if (array[mid] > key)
+				return binarySearchArray(array, low, mid - 1, key);
+			else
+				return binarySearchArray(array, mid + 1, high, key);
+		}
+	}
+
+	/**
+	 * Exercise 2.3-7
+	 * @param A
+	 * @param sum
+	 * @return returns true if the input array has 2 elements whose sum is equal to input sum
+	 */
+	public static boolean twoSum(int[] A, int sum) {
+		mergeSort(A, 0, A.length - 1);
+		int[] B = new int[A.length];
+		for (int i = 0; i < A.length; i++) {
+			B[i] = sum - A[i];
+		}
+		for (int i = 0; i < B.length; i++) {
+			int j = Utils.binarySearch(A, B[i]);
+			if (j != -1 && j != i)
+				return true;
+		}
+		return false;
+	}
 
 	/** Driver */
 	public static void main(String[] args) {
@@ -127,5 +147,12 @@ public class Solutions3 {
 		int[] C = new int[] {1, 4, 7, 8, 0, 2, 3};
 		mergeNoSentinels(C, 0, 3, C.length - 1);
 		Utils.print(C);
+
+		// Driver for twoSum function
+		int[] D = new int[] {7, 4, 6, 1, 9};
+		System.out.println(twoSum(D, 16));
+		System.out.println(twoSum(D, 14));
+		System.out.println(twoSum(D, 10));
+		System.out.println(twoSum(D, 12));
 	}
 }
