@@ -6,6 +6,7 @@ public class Utils {
         for (int i: a) {
             System.out.print(i + ", ");
         }
+        System.out.println();
     }
     
     /** Compare two int array */

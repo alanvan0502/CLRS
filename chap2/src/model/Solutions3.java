@@ -134,6 +134,35 @@ public class Solutions3 {
 		return false;
 	}
 
+	/**
+	 * Problem 2-1
+	 * Insertion sort on small arrays in merge sort
+	 * A, p, r are the same as mergeSort, k is size of sub-array where insertion sort
+	 * algorithm kicks in
+	 */
+	public static void mergeInsertSort(int[] A, int p, int r, int k) {
+		if (p - r > k) {
+			int q = (int)Math.floor((p + r)/2);
+			mergeInsertSort(A, p, q, k);
+			mergeInsertSort(A, q + 1, r, k);
+			merge(A, p, q, r);
+		} else {
+			insertionSort(A, p, r);
+		}
+	}
+
+	public static void insertionSort(int[] A, int left, int right) {
+		for (int j = left; j <= right; j++) {
+			int key = A[j];
+			int i = j - 1;
+			while (i >= 0 && (A[i] > key)) {
+				A[i+1] = A[i];
+				i--;
+			}
+			A[i+1] = key;
+		}
+	}
+	
 	/** Driver */
 	public static void main(String[] args) {
 		int[] A = new int[] {4, 5, 2, 1, 6};
@@ -154,5 +183,10 @@ public class Solutions3 {
 		System.out.println(twoSum(D, 14));
 		System.out.println(twoSum(D, 10));
 		System.out.println(twoSum(D, 12));
+		
+		// Driver for mergeInsert
+		int[] E = new int[] {7, 4, 6, 1, 9, 100, 89, 17, 30};
+		mergeInsertSort(E, 0, E.length - 1, 3);
+		Utils.print(E);
 	}
 }
