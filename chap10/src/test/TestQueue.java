@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,17 +19,13 @@ public class TestQueue {
 	@Test
 	public void testEnqueueAndDequeue() {
 		Q.enqueue(4);
-		System.out.println(Q);
 		Q.enqueue(1);
-		Q.toString();
-		System.out.println(Q);
 		Q.enqueue(3);
-		System.out.println(Q);
-		Q.dequeue();
-		System.out.println(Q);
+		int e1 = Q.dequeue();
+		assertTrue(e1 == 4);
 		Q.enqueue(8);
-		System.out.println(Q);
-		Q.dequeue();
+		int e2 = Q.dequeue();
+		assertTrue(e2 == 1);
 	}
 	
 	@Test (expected = Error.class)
@@ -35,7 +33,6 @@ public class TestQueue {
 		for (int i = 0; i < 5; i++) {
 			Q.enqueue(i);
 		}
-		System.out.println(Q);
 		Q.enqueue(6);
 	}
 	
@@ -48,7 +45,6 @@ public class TestQueue {
 		for (int i = 0; i < 3; i++) {
 			Q.enqueue(i + 1);
 		}
-		System.out.println(Q);
 		Q.enqueue(6);
 	}
 	

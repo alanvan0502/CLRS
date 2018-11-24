@@ -1,12 +1,13 @@
 package model;
 
-public class Queue {
+public class Deque {
+
 	private int[] arr;
 	private int head;
 	private int tail;
 	
-	// Exercise 10.1-3 (See TestQueue) and 10.1-4: Rewrite ENQUEUE and DEQUEUE to detect underflow and overflow of a queue
-	public Queue(int size) {
+	// Exercise 10.1-5 Implement Deque with 4 operations to insert and delete at beginning and end of the queue
+	public Deque(int size) {
 		head = 0;
 		tail = 0;
 		arr = new int[size + 1];
@@ -16,14 +17,7 @@ public class Queue {
 		return head == tail;
 	}
 	
-	public int numElement() {
-		if (tail >= head)
-			return tail - head;
-		else
-			return arr.length - head + tail;
-	}
-	
-	public void enqueue(int x) throws Error {
+	public void insertLast(int x) throws Error {
 		if (isNotFull()) {
 			arr[tail] = x;
 			if (tail == arr.length - 1) {
@@ -31,6 +25,19 @@ public class Queue {
 			} else {
 				tail = tail + 1;
 			}
+		} else {
+			throw new Error("Queue overflow");
+		}
+	}
+	
+	public void insertFront(int x) throws Error {
+		if (isNotFull()) {
+			if (head == 0) {
+				head = arr.length - 1;
+			} else {
+				head = head - 1;
+			}
+			arr[head] = x;
 		} else {
 			throw new Error("Queue overflow");
 		}
@@ -45,13 +52,29 @@ public class Queue {
 		return false;
 	}
 
-	public int dequeue() throws Error {
+	public int getFront() throws Error {
 		if (head != tail) {
 			int x = arr[head];
 			if (head == arr.length - 1) {
 				head = 0;
 			} else {
 				head = head + 1;
+			}
+			return x;
+		} else {
+			throw new Error("Queue underflow");
+		}
+	}
+	
+	public int getLast() throws Error {
+		if (head != tail) {
+			int x;
+			if (tail != 0) {
+				tail = tail - 1;
+				x = arr[tail];
+			} else {
+				tail = arr.length - 1;
+				x = arr[tail];
 			}
 			return x;
 		} else {
