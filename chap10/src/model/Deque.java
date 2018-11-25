@@ -1,6 +1,7 @@
 package model;
 
-// Two way queue
+// Two way queue implementation where insert and get can be done 
+// at either front-end or back-end
 public class Deque {
 
 	private int[] arr;
