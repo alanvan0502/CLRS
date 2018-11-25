@@ -1,5 +1,6 @@
 package model;
 
+// Two way queue
 public class Deque {
 
 	private int[] arr;
